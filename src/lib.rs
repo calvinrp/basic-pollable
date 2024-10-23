@@ -11,7 +11,7 @@ impl Guest for MyComponent {
     fn start() {
         let document = global::get_window().document().unwrap();
         let button = document.query_selector("button").unwrap();
-        wasi::io::poll::poll(&vec![&button.onclick_subscribe()]);
+        button.onclick_subscribe().block();
         button.set_text_content("Clicked!");
     }
 }
