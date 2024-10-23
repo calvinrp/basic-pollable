@@ -1,0 +1,23 @@
+package something:browser;
+
+world window {
+  import global;
+  export start: func();
+}
+
+interface global {
+  resource window {
+    document: func() -> option<document>;
+  }
+  resource document {
+    query-selector: func(selectors: string) -> option<element>;
+  }
+  resource element {
+    text-content: func() -> string;
+    set-text-content: func(text-content: string);
+    // onclick-subscribe: func() -> pollable;
+    onclick-get: func() -> option<pointer-event>;
+  }
+  resource pointer-event { }
+  get-window: func() -> window;
+}
