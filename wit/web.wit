@@ -6,6 +6,8 @@ world window {
 }
 
 interface global {
+  use wasi:io/poll@0.2.0.{pollable};
+
   resource window {
     document: func() -> option<document>;
   }
@@ -15,7 +17,7 @@ interface global {
   resource element {
     text-content: func() -> string;
     set-text-content: func(text-content: string);
-    // onclick-subscribe: func() -> pollable;
+    onclick-subscribe: func() -> pollable;
     onclick-get: func() -> option<pointer-event>;
   }
   resource pointer-event { }

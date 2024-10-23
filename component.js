@@ -1,8 +1,11 @@
 import { global } from './imports.js';
+import { poll as poll$1 } from '@bytecodealliance/preview2-shim/io';
 const { Document,
   Element,
   Window,
   getWindow } = global;
+const { Pollable,
+  poll } = poll$1;
 
 const base64Compile = str => WebAssembly.compile(typeof Buffer !== 'undefined' ? Buffer.from(str, 'base64') : Uint8Array.from(atob(str), b => b.charCodeAt(0)));
 
@@ -63,10 +66,10 @@ const utf8Decoder = new TextDecoder();
 
 
 let exports0;
-const handleTable0 = [T_FLAG, 0];
-const captureTable0= new Map();
-let captureCnt0 = 0;
-handleTables[0] = handleTable0;
+const handleTable1 = [T_FLAG, 0];
+const captureTable1= new Map();
+let captureCnt1 = 0;
+handleTables[1] = handleTable1;
 
 function trampoline0() {
   const ret = getWindow();
@@ -75,23 +78,59 @@ function trampoline0() {
   }
   var handle0 = ret[symbolRscHandle];
   if (!handle0) {
-    const rep = ret[symbolRscRep] || ++captureCnt0;
-    captureTable0.set(rep, ret);
-    handle0 = rscTableCreateOwn(handleTable0, rep);
+    const rep = ret[symbolRscRep] || ++captureCnt1;
+    captureTable1.set(rep, ret);
+    handle0 = rscTableCreateOwn(handleTable1, rep);
   }
   return handle0;
 }
+const handleTable3 = [T_FLAG, 0];
+const captureTable3= new Map();
+let captureCnt3 = 0;
+handleTables[3] = handleTable3;
+const handleTable0 = [T_FLAG, 0];
+const captureTable0= new Map();
+let captureCnt0 = 0;
+handleTables[0] = handleTable0;
+
+function trampoline2(arg0) {
+  var handle1 = arg0;
+  var rep2 = handleTable3[(handle1 << 1) + 1] & ~T_FLAG;
+  var rsc0 = captureTable3.get(rep2);
+  if (!rsc0) {
+    rsc0 = Object.create(Element.prototype);
+    Object.defineProperty(rsc0, symbolRscHandle, { writable: true, value: handle1});
+    Object.defineProperty(rsc0, symbolRscRep, { writable: true, value: rep2});
+  }
+  curResourceBorrows.push(rsc0);
+  const ret = rsc0.onclickSubscribe();
+  for (const rsc of curResourceBorrows) {
+    rsc[symbolRscHandle] = null;
+  }
+  curResourceBorrows = [];
+  if (!(ret instanceof Pollable)) {
+    throw new TypeError('Resource error: Not a valid "Pollable" resource.');
+  }
+  var handle3 = ret[symbolRscHandle];
+  if (!handle3) {
+    const rep = ret[symbolRscRep] || ++captureCnt0;
+    captureTable0.set(rep, ret);
+    handle3 = rscTableCreateOwn(handleTable0, rep);
+  }
+  return handle3;
+}
 let exports1;
 let memory0;
-const handleTable1 = [T_FLAG, 0];
-const captureTable1= new Map();
-let captureCnt1 = 0;
-handleTables[1] = handleTable1;
+let realloc0;
+const handleTable2 = [T_FLAG, 0];
+const captureTable2= new Map();
+let captureCnt2 = 0;
+handleTables[2] = handleTable2;
 
-function trampoline4(arg0, arg1) {
+function trampoline6(arg0, arg1) {
   var handle1 = arg0;
-  var rep2 = handleTable0[(handle1 << 1) + 1] & ~T_FLAG;
-  var rsc0 = captureTable0.get(rep2);
+  var rep2 = handleTable1[(handle1 << 1) + 1] & ~T_FLAG;
+  var rsc0 = captureTable1.get(rep2);
   if (!rsc0) {
     rsc0 = Object.create(Window.prototype);
     Object.defineProperty(rsc0, symbolRscHandle, { writable: true, value: handle1});
@@ -114,22 +153,18 @@ function trampoline4(arg0, arg1) {
     }
     var handle3 = e[symbolRscHandle];
     if (!handle3) {
-      const rep = e[symbolRscRep] || ++captureCnt1;
-      captureTable1.set(rep, e);
-      handle3 = rscTableCreateOwn(handleTable1, rep);
+      const rep = e[symbolRscRep] || ++captureCnt2;
+      captureTable2.set(rep, e);
+      handle3 = rscTableCreateOwn(handleTable2, rep);
     }
     dataView(memory0).setInt32(arg1 + 4, handle3, true);
   }
 }
-const handleTable2 = [T_FLAG, 0];
-const captureTable2= new Map();
-let captureCnt2 = 0;
-handleTables[2] = handleTable2;
 
-function trampoline5(arg0, arg1, arg2, arg3) {
+function trampoline7(arg0, arg1, arg2, arg3) {
   var handle1 = arg0;
-  var rep2 = handleTable1[(handle1 << 1) + 1] & ~T_FLAG;
-  var rsc0 = captureTable1.get(rep2);
+  var rep2 = handleTable2[(handle1 << 1) + 1] & ~T_FLAG;
+  var rsc0 = captureTable2.get(rep2);
   if (!rsc0) {
     rsc0 = Object.create(Document.prototype);
     Object.defineProperty(rsc0, symbolRscHandle, { writable: true, value: handle1});
@@ -155,18 +190,18 @@ function trampoline5(arg0, arg1, arg2, arg3) {
     }
     var handle4 = e[symbolRscHandle];
     if (!handle4) {
-      const rep = e[symbolRscRep] || ++captureCnt2;
-      captureTable2.set(rep, e);
-      handle4 = rscTableCreateOwn(handleTable2, rep);
+      const rep = e[symbolRscRep] || ++captureCnt3;
+      captureTable3.set(rep, e);
+      handle4 = rscTableCreateOwn(handleTable3, rep);
     }
     dataView(memory0).setInt32(arg3 + 4, handle4, true);
   }
 }
 
-function trampoline6(arg0, arg1, arg2) {
+function trampoline8(arg0, arg1, arg2) {
   var handle1 = arg0;
-  var rep2 = handleTable2[(handle1 << 1) + 1] & ~T_FLAG;
-  var rsc0 = captureTable2.get(rep2);
+  var rep2 = handleTable3[(handle1 << 1) + 1] & ~T_FLAG;
+  var rsc0 = captureTable3.get(rep2);
   if (!rsc0) {
     rsc0 = Object.create(Element.prototype);
     Object.defineProperty(rsc0, symbolRscHandle, { writable: true, value: handle1});
@@ -182,34 +217,39 @@ function trampoline6(arg0, arg1, arg2) {
   }
   curResourceBorrows = [];
 }
+
+function trampoline9(arg0, arg1, arg2) {
+  var len3 = arg1;
+  var base3 = arg0;
+  var result3 = [];
+  for (let i = 0; i < len3; i++) {
+    const base = base3 + i * 4;
+    var handle1 = dataView(memory0).getInt32(base + 0, true);
+    var rep2 = handleTable0[(handle1 << 1) + 1] & ~T_FLAG;
+    var rsc0 = captureTable0.get(rep2);
+    if (!rsc0) {
+      rsc0 = Object.create(Pollable.prototype);
+      Object.defineProperty(rsc0, symbolRscHandle, { writable: true, value: handle1});
+      Object.defineProperty(rsc0, symbolRscRep, { writable: true, value: rep2});
+    }
+    curResourceBorrows.push(rsc0);
+    result3.push(rsc0);
+  }
+  const ret = poll(result3);
+  for (const rsc of curResourceBorrows) {
+    rsc[symbolRscHandle] = null;
+  }
+  curResourceBorrows = [];
+  var val4 = ret;
+  var len4 = val4.length;
+  var ptr4 = realloc0(0, 0, 4, len4 * 4);
+  var src4 = new Uint8Array(val4.buffer, val4.byteOffset, len4 * 4);
+  (new Uint8Array(memory0.buffer, ptr4, len4 * 4)).set(src4);
+  dataView(memory0).setInt32(arg2 + 4, len4, true);
+  dataView(memory0).setInt32(arg2 + 0, ptr4, true);
+}
 let exports2;
 function trampoline1(handle) {
-  const handleEntry = rscTableRemove(handleTable0, handle);
-  if (handleEntry.own) {
-    
-    const rsc = captureTable0.get(handleEntry.rep);
-    if (rsc) {
-      if (rsc[symbolDispose]) rsc[symbolDispose]();
-      captureTable0.delete(handleEntry.rep);
-    } else if (Window[symbolCabiDispose]) {
-      Window[symbolCabiDispose](handleEntry.rep);
-    }
-  }
-}
-function trampoline2(handle) {
-  const handleEntry = rscTableRemove(handleTable2, handle);
-  if (handleEntry.own) {
-    
-    const rsc = captureTable2.get(handleEntry.rep);
-    if (rsc) {
-      if (rsc[symbolDispose]) rsc[symbolDispose]();
-      captureTable2.delete(handleEntry.rep);
-    } else if (Element[symbolCabiDispose]) {
-      Element[symbolCabiDispose](handleEntry.rep);
-    }
-  }
-}
-function trampoline3(handle) {
   const handleEntry = rscTableRemove(handleTable1, handle);
   if (handleEntry.own) {
     
@@ -217,6 +257,45 @@ function trampoline3(handle) {
     if (rsc) {
       if (rsc[symbolDispose]) rsc[symbolDispose]();
       captureTable1.delete(handleEntry.rep);
+    } else if (Window[symbolCabiDispose]) {
+      Window[symbolCabiDispose](handleEntry.rep);
+    }
+  }
+}
+function trampoline3(handle) {
+  const handleEntry = rscTableRemove(handleTable0, handle);
+  if (handleEntry.own) {
+    
+    const rsc = captureTable0.get(handleEntry.rep);
+    if (rsc) {
+      if (rsc[symbolDispose]) rsc[symbolDispose]();
+      captureTable0.delete(handleEntry.rep);
+    } else if (Pollable[symbolCabiDispose]) {
+      Pollable[symbolCabiDispose](handleEntry.rep);
+    }
+  }
+}
+function trampoline4(handle) {
+  const handleEntry = rscTableRemove(handleTable3, handle);
+  if (handleEntry.own) {
+    
+    const rsc = captureTable3.get(handleEntry.rep);
+    if (rsc) {
+      if (rsc[symbolDispose]) rsc[symbolDispose]();
+      captureTable3.delete(handleEntry.rep);
+    } else if (Element[symbolCabiDispose]) {
+      Element[symbolCabiDispose](handleEntry.rep);
+    }
+  }
+}
+function trampoline5(handle) {
+  const handleEntry = rscTableRemove(handleTable2, handle);
+  if (handleEntry.own) {
+    
+    const rsc = captureTable2.get(handleEntry.rep);
+    if (rsc) {
+      if (rsc[symbolDispose]) rsc[symbolDispose]();
+      captureTable2.delete(handleEntry.rep);
     } else if (Document[symbolCabiDispose]) {
       Document[symbolCabiDispose](handleEntry.rep);
     }
@@ -230,27 +309,34 @@ function start() {
 const $init = (() => {
   let gen = (function* init () {
     const module0 = fetchCompile(new URL('./component.core.wasm', import.meta.url));
-    const module1 = base64Compile('AGFzbQEAAAABEwNgAn9/AGAEf39/fwBgA39/fwADBAMAAQIEBQFwAQMDBxgEATAAAAExAAEBMgACCCRpbXBvcnRzAQAKKwMLACAAIAFBABEAAAsPACAAIAEgAiADQQERAQALDQAgACABIAJBAhECAAsALglwcm9kdWNlcnMBDHByb2Nlc3NlZC1ieQENd2l0LWNvbXBvbmVudAYwLjE4LjIA4AEEbmFtZQATEndpdC1jb21wb25lbnQ6c2hpbQHDAQMAOWluZGlyZWN0LXNvbWV0aGluZzpicm93c2VyL2dsb2JhbC1bbWV0aG9kXXdpbmRvdy5kb2N1bWVudAFBaW5kaXJlY3Qtc29tZXRoaW5nOmJyb3dzZXIvZ2xvYmFsLVttZXRob2RdZG9jdW1lbnQucXVlcnktc2VsZWN0b3ICQmluZGlyZWN0LXNvbWV0aGluZzpicm93c2VyL2dsb2JhbC1bbWV0aG9kXWVsZW1lbnQuc2V0LXRleHQtY29udGVudA');
-    const module2 = base64Compile('AGFzbQEAAAABEwNgAn9/AGAEf39/fwBgA39/fwACHwQAATAAAAABMQABAAEyAAIACCRpbXBvcnRzAXABAwMJCQEAQQALAwABAgAuCXByb2R1Y2VycwEMcHJvY2Vzc2VkLWJ5AQ13aXQtY29tcG9uZW50BjAuMTguMgAcBG5hbWUAFRR3aXQtY29tcG9uZW50OmZpeHVwcw');
+    const module1 = base64Compile('AGFzbQEAAAABGQRgAn9/AGAEf39/fwBgA39/fwBgA39/fwADBQQAAQIDBAUBcAEEBAccBQEwAAABMQABATIAAgEzAAMIJGltcG9ydHMBAAo5BAsAIAAgAUEAEQAACw8AIAAgASACIANBAREBAAsNACAAIAEgAkECEQIACw0AIAAgASACQQMRAwALAC4JcHJvZHVjZXJzAQxwcm9jZXNzZWQtYnkBDXdpdC1jb21wb25lbnQGMC4xOC4yAIICBG5hbWUAExJ3aXQtY29tcG9uZW50OnNoaW0B5QEEADlpbmRpcmVjdC1zb21ldGhpbmc6YnJvd3Nlci9nbG9iYWwtW21ldGhvZF13aW5kb3cuZG9jdW1lbnQBQWluZGlyZWN0LXNvbWV0aGluZzpicm93c2VyL2dsb2JhbC1bbWV0aG9kXWRvY3VtZW50LnF1ZXJ5LXNlbGVjdG9yAkJpbmRpcmVjdC1zb21ldGhpbmc6YnJvd3Nlci9nbG9iYWwtW21ldGhvZF1lbGVtZW50LnNldC10ZXh0LWNvbnRlbnQDIGluZGlyZWN0LXdhc2k6aW8vcG9sbEAwLjIuMC1wb2xs');
+    const module2 = base64Compile('AGFzbQEAAAABGQRgAn9/AGAEf39/fwBgA39/fwBgA39/fwACJAUAATAAAAABMQABAAEyAAIAATMAAwAIJGltcG9ydHMBcAEEBAkKAQBBAAsEAAECAwAuCXByb2R1Y2VycwEMcHJvY2Vzc2VkLWJ5AQ13aXQtY29tcG9uZW50BjAuMTguMgAcBG5hbWUAFRR3aXQtY29tcG9uZW50OmZpeHVwcw');
     ({ exports: exports0 } = yield instantiateCore(yield module1));
     ({ exports: exports1 } = yield instantiateCore(yield module0, {
       'something:browser/global': {
         '[method]document.query-selector': exports0['1'],
+        '[method]element.onclick-subscribe': trampoline2,
         '[method]element.set-text-content': exports0['2'],
         '[method]window.document': exports0['0'],
-        '[resource-drop]document': trampoline3,
-        '[resource-drop]element': trampoline2,
+        '[resource-drop]document': trampoline5,
+        '[resource-drop]element': trampoline4,
         '[resource-drop]window': trampoline1,
         'get-window': trampoline0,
       },
+      'wasi:io/poll@0.2.0': {
+        '[resource-drop]pollable': trampoline3,
+        poll: exports0['3'],
+      },
     }));
     memory0 = exports1.memory;
+    realloc0 = exports1.cabi_realloc;
     ({ exports: exports2 } = yield instantiateCore(yield module2, {
       '': {
         $imports: exports0.$imports,
-        '0': trampoline4,
-        '1': trampoline5,
-        '2': trampoline6,
+        '0': trampoline6,
+        '1': trampoline7,
+        '2': trampoline8,
+        '3': trampoline9,
       },
     }));
   })();
