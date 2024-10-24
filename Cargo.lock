@@ -24,7 +24,6 @@ checksum = "c042108f3ed77fd83760a5fd79b53be043192bb3b9dba91d8c574c0ada7850c8"
 name = "basic-pollable"
 version = "0.1.0"
 dependencies = [
- "wasi",
  "wit-bindgen",
 ]
 
@@ -231,15 +230,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
-name = "wasi"
-version = "0.13.1+wasi-0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f43d1c36145feb89a3e61aa0ba3e582d976a8ab77f1474aa0adb80800fe0cf8"
-dependencies = [
- "wit-bindgen-rt 0.24.0",
-]
-
-[[package]]
 name = "wasm-encoder"
 version = "0.214.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -284,7 +274,7 @@ version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "89178260ed223de8a5a81f9cff961481dfbbd55b25c17e4dd0b4c8e4b8ae646d"
 dependencies = [
- "wit-bindgen-rt 0.28.0",
+ "wit-bindgen-rt",
  "wit-bindgen-rust-macro",
 ]
 
@@ -297,15 +287,6 @@ dependencies = [
  "anyhow",
  "heck",
  "wit-parser",
-]
-
-[[package]]
-name = "wit-bindgen-rt"
-version = "0.24.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b0780cf7046630ed70f689a098cd8d56c5c3b22f2a7379bbdb088879963ff96"
-dependencies = [
- "bitflags",
 ]
 
 [[package]]

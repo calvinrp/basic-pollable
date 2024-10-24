@@ -6,15 +6,19 @@ export class Pollable {
   async block() {}
 }
 
-export const poll = async (inList) => {
-  await Promise.race(inList.map((pollable, i) => pollable.block()));
+export const poll = {
+  poll: async (inList) => {
+    await Promise.race(inList.map((pollable, i) => pollable.block()));
 
-  let ready = [];
-  for (const i = 0; i < inList.length; i++) {
-    if (await inList[i].ready()) {
-      ready.push(i);
+    let ready = [];
+    for (let i = 0; i < inList.length; i++) {
+      if (await inList[i].ready()) {
+        ready.push(i);
+      }
     }
-  }
 
-  return new Uint32Array(ready);
+    return new Uint32Array(ready);
+  },
+
+  Pollable,
 };

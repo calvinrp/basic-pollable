@@ -10,4 +10,3 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wit-bindgen = "0.28.0"
-wasi = "=0.13.1"
