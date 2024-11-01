@@ -58,10 +58,12 @@ export class Window {
     }
 }
 
+export const getWindow = function() {
+    return new Window(window);
+};
+
 export const global = {
-    getWindow: () => {
-        return new Window(window);
-    },
+    getWindow,
     Document: Document,
     Element: Element,
     Window: Window,
